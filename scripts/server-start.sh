@@ -1,7 +1,7 @@
 #ToDo: variabili da valorizzare con input utente
 PUB_KEY="CHIAVE"
 NODE_VERSION=22
-HTML_SPLASH="https://raw.githubusercontent.com/lambia/struttura-setup-cli/master/index.html"
+HTML_SPLASH="https://raw.githubusercontent.com/lambia/struttura-setup-cli/master/public/index.html"
 PERSON=dev
 
 echo 
