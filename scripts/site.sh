@@ -54,21 +54,23 @@ sudo ln -s /etc/nginx/sites-available/$SITO /etc/nginx/sites-enabled/
 SITO=
 ############## qui fine loop
 
-#<------- INIZIO VERIFICARE
 echo
 echo "Imposto PM2 per l'avvio automatico"
 pm2 ls
 pm2 startup systemd
 sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u dev --hp /home/dev 
 pm2 save
-#<------- INIZIO VERIFICARE
 
 sudo nginx -t
 sudo systemctl restart nginx
 
+echo 
+echo "Setup completato, dovresti riavviare la macchina"
 
 
+# todo
 # manca https
+# chiedere all'utente quali passaggi eseguire
 # mancano header addizionali per il server
 # sites_available: fare cURL di una config su github
 # sites_available: gestire location /editor 

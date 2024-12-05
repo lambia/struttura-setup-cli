@@ -64,13 +64,16 @@ echo "- Decommenta \"server_names_hash_bucket_size 64\" per fixare il problema d
 echo "- Decommenta \"server_tokens off\" per nascondere la versione di nginx e il sistema operativo"
 echo "- Aggiungi  \"more_set_headers 'Server: struttura/2.0.0';\" per customizzare l'header \"server\""
 pause
-sudo nano /etc/nginx/nginx.conf # PARTE INTERATTIVA
+sudo nano /etc/nginx/nginx.conf 
+
+# PARTE INTERATTIVA
+echo "Configurazione nginx"
 echo "Modifica welcome page"
-sudo touch /var/www/html/index.html
-sudo curl $HTML_SPLASH > /var/www/html/index.html #ToDo: testare
+sudo curl --output /var/www/html/index.html "$HTML_SPLASH"
 echo "Riavvio nginx"
 sudo nginx -t
 sudo systemctl restart nginx
+# FINE PARTE INTERATTIVA
 
 echo 
 echo "Installo i pacchetti npm globali"
