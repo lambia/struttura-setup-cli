@@ -33,6 +33,15 @@ pm2 start /var/www/$SITO/app/server.js -n $SITO
 echo
 echo "Creo server-block per nginx e lo abilito"
 sudo touch /etc/nginx/sites-available/$SITO
+
+#TODO AGGIUNGERE HEADER
+# add_header X-Frame-Options "SAMEORIGIN"; 
+# add_header X-XSS-Protection "1; mode=block"; 
+# add_header X-Content-Type-Options "nosniff"; 
+# charset utf-8; 
+# location = /favicon.ico { access_log off; log_not_found off; } 
+# location = /robots.txt  { access_log off; log_not_found off; } 
+
 $SITE_CFG = "server { 
         listen 80; 
         listen [::]:80; 
@@ -71,7 +80,7 @@ echo "Setup completato, dovresti riavviare la macchina"
 # todo
 # manca https
 # chiedere all'utente quali passaggi eseguire
-# mancano header addizionali per il server
+# mancano header addizionali per il server (xss, HSTS, CSP, nosniff, charset, favicon e robots)
 # sites_available: fare cURL di una config su github
 # sites_available: gestire location /editor 
 # sites_available: gestire static assets e 404 
