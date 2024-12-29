@@ -1,0 +1,49 @@
+Cambiare nomi siti per renderli più facili da terminale: no spazi, env brevi
+Configurare site su nginx
+Staging online
+Rimuovi vecchi site
+Collega IP Statico
+
+_____________________________
+
+CREARE CARTELLA /site CON ERRORE TEMP
+ATTIVARE SFTP E BOOKMARK LOG NGINX, APP E PM2
+SERVIRE STATIC DA NGINX
+
+INPUT UTENTE PER VARIABILI
+CICLO PER SITI (v. LSD)
+INPUT UTENTE PER QUALI PASSAGGI
+
+CONFIGURAZIONE HTTPS ON-THE-GO (richiede DNS puntati) 
+
+    Installa certbot 
+    sudo apt install certbot python3-certbot-nginx -y 
+
+    Opzionale: verifica ufw con regole https 
+
+    Genera e installa i certificati 
+    sudo certbot --nginx -d $SITO -d www.$SITO 
+
+    Testa 
+
+    Verifica auto-update con 
+    sudo certbot renew --dry-run 
+
+    Ripeti 3-4-5 
+
+ 
+
+ 
+
+VERIFICARE: 
+
+add_header X-Frame-Options "SAMEORIGIN"; 
+add_header X-XSS-Protection "1; mode=block"; 
+add_header X-Content-Type-Options "nosniff"; 
+
+charset utf-8; 
+location = /favicon.ico { access_log off; log_not_found off; } 
+
+location = /robots.txt  { access_log off; log_not_found off; } 
+
+ 
