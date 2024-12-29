@@ -1,7 +1,7 @@
-Test mail
+Test mail e poi live (HTTPS produzione)
+Separare storage
 Configura logging e watch: https://dev.to/mr_ali3n/how-to-configure-pm2-the-right-way-2m33
 Rivedere cache (sito non più online ma si vede e viceversa)
-HTTPS produzione
 _____________________________
 
 CREARE CARTELLA /site CON ERRORE TEMP
