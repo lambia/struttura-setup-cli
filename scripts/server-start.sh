@@ -2,6 +2,7 @@
 PUB_KEY="CHIAVE"
 NODE_VERSION=22
 HTML_SPLASH="https://raw.githubusercontent.com/lambia/struttura-setup-cli/master/public/index.html"
+FLOATING_IP_CFG="https://raw.githubusercontent.com/lambia/struttura-setup-cli/master/public/60-floating-ip.yaml"
 PERSON=dev
 
 echo 
@@ -66,7 +67,8 @@ echo "- Aggiungi  \"more_set_headers 'Server: struttura/2.0.0';\" per customizza
 pause
 sudo nano /etc/nginx/nginx.conf 
 
-# PARTE INTERATTIVA
+# PARTE INTERATTIVA ??
+echo
 echo "Configurazione nginx"
 echo "Modifica welcome page"
 sudo curl --output /var/www/html/index.html "$HTML_SPLASH"
@@ -79,6 +81,30 @@ echo
 echo "Installo i pacchetti npm globali"
 sudo npm install pm2@latest -g && sudo npm install npm@latest -g 
 npm -v 
+
+echo
+echo "Imposto il Floating IP"
+echo "Dovrai cambiare manualmente l'IP"
+# PARTE INTERATTIVA
+sudo curl --output /etc/netplan/60-floating-ip.yaml "$FLOATING_IP_CFG"
+sudo nano /etc/netplan/60-floating-ip.yaml
+# FINE PARTE INTERATTIVA
+sudo chmod 600 /etc/netplan/60-floating-ip.yaml
+sudo netplan apply
+
+#echo 
+#echo "Cambio il Default Source Address dal Primary IP al Floating IP 49.13.32.151 -- ATTENZIONE!!"
+# non più necessario, spostato in netplan
+#ip route show
+#sudo ip route replace default via 172.31.1.1 dev eth0 proto dhcp src 49.13.32.151 metric 100
+
+echo 
+echo "Installo certbot e relativi certificati"
+sudo apt install certbot python3-certbot-nginx
+#sudo certbot --nginx -d staging.example.com
+#sudo certbot --nginx -d example.com -d www.example.com
+sudo systemctl status certbot.timer
+sudo certbot renew --dry-run
 
 echo 
 echo "Setup completato, dovresti riavviare la macchina ed eseguire lo script di deploy"

@@ -1,0 +1,13 @@
+network:
+   version: 2
+   renderer: networkd
+   ethernets:
+     eth0:
+       addresses:
+       - 123.123.123.123/32
+       routes:
+        - on-link: true
+          to: "default"
+          via: 172.31.1.1
+          from: 49.13.32.151
+          metric: 90

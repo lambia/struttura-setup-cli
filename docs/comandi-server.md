@@ -6,6 +6,36 @@ Rimuovi utenti
 Elenca utenti
 `cut -d: -f1 /etc/passwd`
 
+# ASSEGNAZIONE FLOATING IP
+
+Assegnazione temporanea
+`sudo ip addr add 123.123.123.123 dev eth0`
+
+Crea configurazione netplan per test
+`sudo touch ~/ip-test.yaml`
+`sudo chmod 600 ~/ip-test.yaml`
+
+Crea configurazione netplan per test - Configurazione base IPv4
+```
+network:
+   version: 2
+   renderer: networkd
+   ethernets:
+     eth0:
+       addresses:
+       - 123.123.123.123/32
+```
+
+Test configurazione per 60 secondi
+`sudo netplan try ip-test.yaml --timeout 60`
+Se non funziona pare bisogna riavviare 
+
+Sposta configurazione di test come permanente
+`sudo mv ~/ip-test.yaml /etc/netplan/60-floating-ip.yaml`
+
+Riavvia netplan per applicare
+`sudo netplan apply`
+
 # GESTIONE NGINX 
 
 Verifica configurazione
@@ -47,9 +77,8 @@ Clona una repo specificando il certificato da usare
 
 Verifica sshCommand 
 `git config --get core.sshCommand`
- 
 
-# GESTIONE PM2
+# GESTIONE PM2 - GENERALE
 
 Genera comando per avvio automatico
 `pm2 startup systemd`
@@ -72,12 +101,41 @@ Avvia applicazione con un nome specifico
 Ferma applicazione
 `pm2 stop $NOME_APP`
 
+Elimina applicazione
+`pm2 delete $NOME_APP`
+
 Riavvia applicazione
 `pm2 restart $NOME_APP`
 
 Informazioni applicazione
 `pm2 info $NOME_APP`
 
+Esegui comando su tutte le applicazioni (es. avvia/rimuovi tutte)
+`pm2 $COMANDO all`
+
+# GESTIONE PM2 - ECOSYSTEM
+
+Genera una configurazione semplice (/home/utente/ecosystem.config.js)
+`pm2 init simple`
+
+Start all applications
+`pm2 start ecosystem.config.js`
+
+Stop all
+`pm2 stop ecosystem.config.js`
+
+Restart all
+`pm2 restart ecosystem.config.js`
+
+Reload all
+`pm2 reload ecosystem.config.js`
+
+Delete all
+`pm2 delete ecosystem.config.js`
+
+Avvia app specifica/e
+`pm2 start ecosystem.config.js --only $NOME_APP`
+`pm2 start ecosystem.config.js --only "$NOME_APP1,$NOME_APP2"`
 
 # Percorsi
 
@@ -94,3 +152,11 @@ Informazioni applicazione
 `/var/log/nginx/access.log`: Every request to your web server is recorded in this log file unless Nginx is configured to do otherwise.
 
 `/var/log/nginx/error.log`: Any Nginx errors will be recorded in this log.
+
+`/etc/netplan`: netplan configuration folder
+
+`/etc/network`: ifupdown configuration folder
+
+`/run/systemd/network/`: networkd configuration folder
+
+`/etc/systemd/network/`: networkd  configuration folder (copy to)

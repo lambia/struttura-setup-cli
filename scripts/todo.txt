@@ -1,9 +1,7 @@
-Cambiare nomi siti per renderli più facili da terminale: no spazi, env brevi
-Configurare site su nginx
-Staging online
-Rimuovi vecchi site
-Collega IP Statico
-
+Test mail
+Configura logging e watch: https://dev.to/mr_ali3n/how-to-configure-pm2-the-right-way-2m33
+Rivedere cache (sito non più online ma si vede e viceversa)
+HTTPS produzione
 _____________________________
 
 CREARE CARTELLA /site CON ERRORE TEMP
@@ -14,26 +12,6 @@ INPUT UTENTE PER VARIABILI
 CICLO PER SITI (v. LSD)
 INPUT UTENTE PER QUALI PASSAGGI
 
-CONFIGURAZIONE HTTPS ON-THE-GO (richiede DNS puntati) 
-
-    Installa certbot 
-    sudo apt install certbot python3-certbot-nginx -y 
-
-    Opzionale: verifica ufw con regole https 
-
-    Genera e installa i certificati 
-    sudo certbot --nginx -d $SITO -d www.$SITO 
-
-    Testa 
-
-    Verifica auto-update con 
-    sudo certbot renew --dry-run 
-
-    Ripeti 3-4-5 
-
- 
-
- 
 
 VERIFICARE: 
 
