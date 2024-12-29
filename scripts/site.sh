@@ -11,20 +11,20 @@ echo "Link: https://github.com/$REPO/settings/keys"
 cat ~/$GIT_CERT.pub 
 
 ############## qui inizia loop
-#TODO: usare ENV=production e ENV=staging invece di SITO
-SITO=alphawax.com
+ENV=staging #poi "production"
+SITO=alphawax.com #poi "hywax.com" "serwax.com" e gli *staging*
 PORT=8001
 
 echo
-echo "Creo la cartella per $SITO e ne imposto i permessi"
-sudo mkdir /var/www/$SITO 
-sudo chown -R $PERSON:$PERSON /var/www/$SITO 
-sudo chmod -R 755 /var/www/$SITO
+echo "Creo la cartella per $ENV e ne imposto i permessi"
+sudo mkdir /var/www/$ENV 
+sudo chown -R $PERSON:$PERSON /var/www/$ENV 
+sudo chmod -R 755 /var/www/$ENV
 
 echo
 echo "Clono la repo, installo le dipendenze, imposto il .env e avvio PM2"
-git clone -c "core.sshCommand=ssh -i ~/$GIT_CERT" $REPO_CONN /var/www/$SITO 
-cd /var/www/$SITO #importante per npm ma anche per lanciare pm2
+git clone -c "core.sshCommand=ssh -i ~/$GIT_CERT" $REPO_CONN /var/www/$ENV 
+cd /var/www/$ENV #importante per npm ma anche per lanciare pm2
 npm i 
 
 #OLD METODO PER-SITE
