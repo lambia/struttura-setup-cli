@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "Alphawax Staging",
+      name: "alphawax.staging",
       cwd: "/var/www/staging/",
       script: "/var/www/staging/app/server.js",
       instances: "max",
@@ -13,7 +13,7 @@ module.exports = {
       }
     },
     {
-      name: "Hywax Staging",
+      name: "hywax.staging",
       cwd: "/var/www/staging/",
       script: "/var/www/staging/app/server.js",
       instances: "max",
@@ -25,7 +25,7 @@ module.exports = {
       }
     },
     {
-      name: "SER Staging",
+      name: "serwax.staging",
       cwd: "/var/www/staging/",
       script: "/var/www/staging/app/server.js",
       instances: "max",
@@ -37,7 +37,7 @@ module.exports = {
       }
     },
     {
-      name: "Alphawax Production",
+      name: "alphawax.production",
       cwd: "/var/www/production/",
       script: "/var/www/production/app/server.js",
       instances: "max",
@@ -49,7 +49,7 @@ module.exports = {
       }
     },
     {
-      name: "Hywax Production",
+      name: "hywax.production",
       cwd: "/var/www/production/",
       script: "/var/www/production/app/server.js",
       instances: "max",
@@ -61,7 +61,7 @@ module.exports = {
       }
     },
     {
-      name: "SER Production",
+      name: "serwax.production",
       cwd: "/var/www/production/",
       script: "/var/www/production/app/server.js",
       instances: "max",
@@ -74,3 +74,4 @@ module.exports = {
     },
   ]
 }
+
