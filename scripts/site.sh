@@ -11,6 +11,7 @@ echo "Link: https://github.com/$REPO/settings/keys"
 cat ~/$GIT_CERT.pub 
 
 ############## qui inizia loop
+#TODO: usare ENV=production e ENV=staging invece di SITO
 SITO=alphawax.com
 PORT=8001
 
@@ -25,11 +26,21 @@ echo "Clono la repo, installo le dipendenze, imposto il .env e avvio PM2"
 git clone -c "core.sshCommand=ssh -i ~/$GIT_CERT" $REPO_CONN /var/www/$SITO 
 cd /var/www/$SITO #importante per npm ma anche per lanciare pm2
 npm i 
-cp .env.example .env
-echo "APP_PORT=$PORT" >> .env
-echo "APP_SITE_FOLDER=../sites/$SITO" >> .env
-pm2 start /var/www/$SITO/app/server.js -n $SITO 
 
+#OLD METODO PER-SITE
+#cp .env.example .env
+#echo "APP_PORT=$PORT" >> .env
+#echo "APP_SITE_FOLDER=../sites/$SITO" >> .env
+#pm2 start /var/www/$SITO/app/server.js -n $SITO 
+
+pm2 init simple
+nano /home/dev/ecosystem.config.js
+echo COPIA CONTENUTO FILE
+pm2 start ecosystem.config.js
+# per lavorare su un sito specifico:
+# pm2 reload ecosystem.config.js --only NOMEAPP
+
+#TODO: riprendi a usare SITO
 echo
 echo "Creo server-block per nginx e lo abilito"
 sudo touch /etc/nginx/sites-available/$SITO
