@@ -1,13 +1,3 @@
-Test mail e poi live (HTTPS produzione)
-Separare storage
-Configura logging e watch: https://dev.to/mr_ali3n/how-to-configure-pm2-the-right-way-2m33
-Rivedere cache (sito non più online ma si vede e viceversa)
-_____________________________
-
-CREARE CARTELLA /site CON ERRORE TEMP
-ATTIVARE SFTP E BOOKMARK LOG NGINX, APP E PM2
-SERVIRE STATIC DA NGINX
-
 INPUT UTENTE PER VARIABILI
 CICLO PER SITI (v. LSD)
 INPUT UTENTE PER QUALI PASSAGGI
